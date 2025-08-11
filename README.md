@@ -20,5 +20,6 @@ python main.py --file example1.log example2.log --report average
 python -m pytest
 ```
 - так же можно указывать необязательный параметр даты
-```python main.py --file example1.log example2.log --report average --date 2025-22-06
+```bash
+python main.py --file example1.log example2.log --report average --date 2025-22-06
 ```
