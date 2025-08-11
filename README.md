@@ -3,7 +3,7 @@
 ## Быстрый старт:
 - клонировать гит
 ```
-git https://github.com/Wiltort/log-parser.git
+git clone https://github.com/Wiltort/log-parser.git
 cd log-parser
 ```
 - установить зависимости

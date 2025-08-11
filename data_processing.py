@@ -2,7 +2,7 @@ from typing import Callable
 
 
 class ReportProcessor:
-    _instances = [] # все экземпляры
+    _instances = []  # все экземпляры
 
     def __init__(self, keyword: str, get_report: Callable):
 
