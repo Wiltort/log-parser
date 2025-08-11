@@ -14,6 +14,7 @@ def parse_args():
         choices=[r.keyword for r in ReportProcessor.get_all_instances()],
         help='Type of report'
     )
+    parser.add_argument('--date', required=False, help='date in format `2025-22-06`')
     return parser.parse_args()
 
 
@@ -33,7 +34,13 @@ def main():
     args = parse_args()
     logs = read_logs(args.file)
     processor = ReportProcessor.select_report_type(args.report)
-    report = processor.get_report(logs)
+    if args.date:
+        try:
+            year, day, month = args.date.split('-')
+        except ValueError:
+            print('Incorrect data format (YYYY-DD-MM)')
+
+    report = processor.get_report(logs=logs, date=f'{year}-{month}-{day}')
     if not report:
         print("Empty report data")
         return
