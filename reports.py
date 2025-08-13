@@ -3,7 +3,7 @@ from data_processing import ReportProcessor
 
 
 @ReportProcessor.report(keyword='average')
-def generate_average_report(logs, date):
+def generate_average_report(logs, args):
     """
     Generate a report with the average response time per endpoint.
 
@@ -13,6 +13,13 @@ def generate_average_report(logs, date):
     Returns:
         list: List of dicts with keys 'handler', 'total', and 'avg_response_time'.
     """
+    date = None
+    if args and args.date:
+        try:
+            year, day, month = args.date.split('-')
+            date = f'{year}-{month}-{day}'
+        except ValueError:
+            print('Incorrect data format (YYYY-DD-MM)')
     endpoint_data = defaultdict(lambda: {'count': 0, 'total_time': 0})
     for log in logs:
         endpoint = log.get('url')

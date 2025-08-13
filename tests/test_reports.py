@@ -24,7 +24,7 @@ def test_report_output_structure(report_keyword, sample_logs):
     """Проверяем, что каждый отчёт возвращает непустой список словарей с ожидаемыми ключами."""
     processor = ReportProcessor.select_report_type(report_keyword)
     assert processor is not None
-    result = processor.get_report(sample_logs)
+    result = processor.get_report(sample_logs, args=None)
     assert isinstance(result, list)
     if result:  # Если отчёт не пустой
         assert isinstance(result[0], dict)
@@ -34,6 +34,6 @@ def test_report_output_structure(report_keyword, sample_logs):
 def test_report_empty_logs():
     """Проверяем, что отчёты корректно обрабатывают пустой список логов."""
     for instance in ReportProcessor.get_all_instances():
-        result = instance.get_report([])
+        result = instance.get_report([], args=None)
         assert isinstance(result, list)
         assert len(result) == 0 or all(isinstance(item, dict) for item in result)

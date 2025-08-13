@@ -34,13 +34,7 @@ def main():
     args = parse_args()
     logs = read_logs(args.file)
     processor = ReportProcessor.select_report_type(args.report)
-    if args.date:
-        try:
-            year, day, month = args.date.split('-')
-        except ValueError:
-            print('Incorrect data format (YYYY-DD-MM)')
-
-    report = processor.get_report(logs=logs, date=f'{year}-{month}-{day}')
+    report = processor.get_report(logs=logs, args=args)
     if not report:
         print("Empty report data")
         return
